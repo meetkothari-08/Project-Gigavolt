@@ -6,7 +6,7 @@ The system ran on AWS EC2 (Ubuntu) as two application servers, plus the database
 
 | Server | Runs | Install |
 |---|---|---|
-| **Vector / document server** | ChromaDB HTTP server `:8000`, embedding API `:8001`, document ingestion trigger `:8002`, `vector_search/` corpus build | `pip install -e ".[ml]"` |
+| **Vector / document server** | ChromaDB HTTP server `:8000`, embedding API `:8001`, document ingestion trigger `:8002`, `04-vector-search/scripts/` corpus build | `pip install -e ".[ml]"` |
 | **RAG server** | `gigavolt-ask`, relational ingestion, benchmark, Ollama `:11434` with `phi` | `pip install -e .` |
 | **Database tier** | MariaDB (Silver schema; 3-node Galera for HA), MongoDB (telemetry) | see below |
 
@@ -25,25 +25,25 @@ cp .env.example .env             # then fill in credentials and hosts
 
 ```bash
 # Schema, functions, audit log, generated column, triggers, procedure, view
-sql/deploy.sh
+scripts/deploy_database.sh
 
 # Build Bronze -> staging -> quarantine -> Silver from the raw CSVs, then run all 46 checks
 # (needs local_infile=1 on the server)
-sql/deploy.sh --raw-dir data/raw/erp --validate
+scripts/deploy_database.sh --raw-dir data/raw/erp --validate
 
 # Alternatively, restore an existing Silver layer from a data-only seed
 mariadb-dump --no-create-info --skip-triggers --complete-insert gigavolt \
     customers equipment_models equipment parts dispatches warranty_claims > silver_seed.sql
-sql/deploy.sh --seed silver_seed.sql --validate
+scripts/deploy_database.sh --seed silver_seed.sql --validate
 ```
 
 To reconcile a rebuild with a reference copy (for example, production restored into `gigavolt_prod`):
 
 ```bash
-python tools/compare_silver.py --candidate gigavolt --reference gigavolt_prod --apply-fixes
+python 01-data-ingestion/tools/compare_silver.py --candidate gigavolt --reference gigavolt_prod --apply-fixes
 ```
 
-Create a read-only application account (the grants are listed in [`sql/14_security_views.sql`](../sql/14_security_views.sql)) and put it in `MARIADB_USER` / `MARIADB_PASSWORD`. The relational pipeline and the RAG retriever only ever need `SELECT`.
+Create a read-only application account (the grants are listed in [`02-sql-automation/sql/05_security_views.sql`](../02-sql-automation/sql/05_security_views.sql)) and put it in `MARIADB_USER` / `MARIADB_PASSWORD`. The relational pipeline and the RAG retriever only ever need `SELECT`.
 
 ## 3. MongoDB
 
@@ -61,11 +61,11 @@ mongosh sensorDB --eval '
 
 ```bash
 export GIGAVOLT_DOCUMENTS_DIR=data/documents   # the technical PDFs
-python vector_search/extract_and_chunk.py
-python vector_search/validate_chunks.py
-python vector_search/rebuild_chroma_from_chunks.py    # or steps 3-5 through MariaDB Vector
+python 04-vector-search/scripts/extract_and_chunk.py
+python 04-vector-search/scripts/validate_chunks.py
+python 04-vector-search/scripts/rebuild_chroma_from_chunks.py    # or steps 3-5 through MariaDB Vector
 
-sudo cp deploy/systemd/*.service /etc/systemd/system/
+sudo cp 06-automation/deploy/systemd/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now gigavolt-chroma gigavolt-embedding-api gigavolt-ingestion-api
 curl -s localhost:8001/health
@@ -86,7 +86,7 @@ ollama pull phi
 gigavolt-ingest-relational --dry-run        # check DB connectivity and validation
 gigavolt-ingest-relational
 gigavolt-ask "Show the service history and warranty claims for EQ-5508"
-python benchmarks/rag_benchmark.py
+python 06-automation/benchmark/rag_benchmark.py
 ```
 
 ## Data
@@ -98,8 +98,8 @@ data/
 ├── raw/erp/{customers,equipment,dispatches,parts,warranty_claims}.csv
 ├── raw/telemetry/telemetry_data.json
 ├── documents/*.pdf
-├── processed/            # written by vector_search/
-└── chroma_store/         # written by vector_search/ and the document pipeline
+├── processed/            # written by 04-vector-search/scripts
+└── chroma_store/         # written by 04-vector-search/scripts and the document pipeline
 ```
 
 ## Security notes

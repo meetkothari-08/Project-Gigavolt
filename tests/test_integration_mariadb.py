@@ -1,4 +1,4 @@
-"""Integration tests against a real MariaDB deployed with ``sql/deploy.sh --seed``.
+"""Integration tests against a real MariaDB deployed with ``scripts/deploy_database.sh``.
 
 Skipped unless GIGAVOLT_TEST_MARIADB=1. Uses the MARIADB_* connection settings.
 

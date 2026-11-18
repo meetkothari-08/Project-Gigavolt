@@ -3,8 +3,8 @@
 import numpy as np
 import pytest
 
+from gigavolt.chunking import DocumentChunker
 from gigavolt.ingestion.documents import pipeline as pipeline_module
-from gigavolt.ingestion.documents.chunking import DocumentChunker
 from gigavolt.ingestion.documents.pipeline import (
     DocumentIndexer,
     DocumentPipeline,

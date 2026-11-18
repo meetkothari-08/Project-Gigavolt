@@ -36,11 +36,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y mariadb-client
       - name: Deploy schema, triggers, procedure and views
-        run: sql/deploy.sh
+        run: scripts/deploy_database.sh
       - name: Unit-test the cleansing functions
         run: |
           mariadb -h 127.0.0.1 -uroot -pci-root --batch --skip-column-names \
-            < sql/92_validate_cleansing_functions.sql > results.tsv
+            < 01-data-ingestion/validation/validate_cleansing_functions.sql > results.tsv
           cat results.tsv
           test "$(grep -c 'PASS$' results.tsv)" -eq 15
       - name: Check that every SQL object exists

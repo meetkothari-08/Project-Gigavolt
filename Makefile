@@ -12,23 +12,23 @@ lint:
 test:               ## Offline unit tests (no databases or model servers needed)
 	pytest -q
 
-test-integration:   ## Requires a MariaDB deployed with `make db SEED=...`
+test-integration:   ## Requires a MariaDB deployed with `make db-raw` or `make db SEED=...`
 	GIGAVOLT_TEST_MARIADB=1 pytest -q tests/test_integration_mariadb.py
 
 db:                 ## Deploy schema and SQL objects; optional SEED=path/to/silver_seed.sql
-	sql/deploy.sh $(if $(SEED),--seed $(SEED)) --validate
+	scripts/deploy_database.sh $(if $(SEED),--seed $(SEED)) --validate
 
 db-raw:             ## Build Bronze -> Silver from the raw CSVs in RAW (default data/raw/erp)
-	sql/deploy.sh --raw-dir $(or $(RAW),data/raw/erp) --validate
+	scripts/deploy_database.sh --raw-dir $(or $(RAW),data/raw/erp) --validate
 
 db-validate:
-	sql/deploy.sh --validate
+	scripts/deploy_database.sh --validate
 
 profile:            ## Data-quality profile of the raw ERP extracts
-	python tools/profile_raw_erp.py data/raw/erp
+	python 01-data-ingestion/tools/profile_raw_erp.py data/raw/erp
 
 reconcile:          ## Compare rebuilt Silver with a reference schema: make reconcile REF=gigavolt_prod
-	python tools/compare_silver.py --candidate gigavolt --reference $(REF) --apply-fixes
+	python 01-data-ingestion/tools/compare_silver.py --candidate gigavolt --reference $(REF) --apply-fixes
 
 audit:              ## Re-audit citations in the latest saved RAG benchmark
-	python benchmarks/audit_saved_answers.py $$(ls -t benchmarks/results/rag/benchmark_*.csv | head -1)
+	python 06-automation/benchmark/audit_saved_answers.py $$(ls -t 06-automation/results/benchmark_*.csv | head -1)

@@ -1,6 +1,6 @@
 import pytest
 
-from gigavolt.ingestion.documents.chunking import (
+from gigavolt.chunking import (
     ChunkingConfig,
     DocumentChunker,
     choose_end,

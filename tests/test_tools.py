@@ -80,7 +80,7 @@ def test_profiler_detects_quality_issues(tmp_path):
          "reorder_level": "4"},
     ])
     write_csv(tmp_path, "warranty_claims", [
-        {"claim_id": "W-1", "equipment_id": "EQ-1", "dispatch_id": "D-1", "part_id": "",
+        {"claim_id": "W-1", "equipment_id": "EQ-1", "dispatch_id": "D-1", "part_id": "NULL",
          "claim_date": "2024-01-02", "claim_amount": "10", "approved_amount": "NULL",
          "status": "Open"},
     ])
@@ -102,3 +102,29 @@ def test_profiler_detects_quality_issues(tmp_path):
     fks = profiler.profile_foreign_keys(data)
     assert fks["dispatches.equipment_id -> equipment"]["orphaned"] == 1
     assert fks["warranty_claims.part_id -> parts"]["blank"] == 1
+
+
+compare_silver = load("tools/compare_silver.py", "compare_silver")
+
+
+@pytest.mark.parametrize(
+    ("table", "column", "value", "expected"),
+    [
+        ("customers", "status", "INACTIVE\r", "INACTIVE"),
+        ("equipment", "location_notes", "\r", None),
+        ("equipment", "location_notes", "Backup   unit  near dock\r", "Backup unit near dock"),
+        ("equipment", "location_notes", "NULL\r", None),
+        ("customers", "zip", "2113", "02113"),
+        ("warranty_claims", "denial_reason", "N/A", None),
+        ("warranty_claims", "denial_reason", "Normal wear and tear excluded",
+         "Normal wear and tear excluded"),
+        ("dispatches", "hours_spent", 2.5, 2.5),
+    ],
+)
+def test_documented_production_fixes(table, column, value, expected):
+    assert compare_silver.apply_production_fixes(table, column, value) == expected
+
+
+def test_python_clean_text_mirrors_sql_rules():
+    assert compare_silver.clean_text("<p>N/A</p>") is None
+    assert compare_silver.clean_text(" <b>Volt  Corp</b> ") == "Volt Corp"

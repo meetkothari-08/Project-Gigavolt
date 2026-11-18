@@ -24,13 +24,23 @@ cp .env.example .env             # then fill in credentials and hosts
 ## 2. MariaDB
 
 ```bash
-# Schema, staging/quarantine, audit log, generated column, triggers, procedure, view
+# Schema, functions, audit log, generated column, triggers, procedure, view
 sql/deploy.sh
 
-# With a data-only Silver seed, followed by the 29 validation checks
+# Build Bronze -> staging -> quarantine -> Silver from the raw CSVs, then run all 46 checks
+# (needs local_infile=1 on the server)
+sql/deploy.sh --raw-dir data/raw/erp --validate
+
+# Alternatively, restore an existing Silver layer from a data-only seed
 mariadb-dump --no-create-info --skip-triggers --complete-insert gigavolt \
     customers equipment_models equipment parts dispatches warranty_claims > silver_seed.sql
 sql/deploy.sh --seed silver_seed.sql --validate
+```
+
+To reconcile a rebuild with a reference copy (for example, production restored into `gigavolt_prod`):
+
+```bash
+python tools/compare_silver.py --candidate gigavolt --reference gigavolt_prod --apply-fixes
 ```
 
 Create a read-only application account (the grants are listed in [`sql/14_security_views.sql`](../sql/14_security_views.sql)) and put it in `MARIADB_USER` / `MARIADB_PASSWORD`. The relational pipeline and the RAG retriever only ever need `SELECT`.

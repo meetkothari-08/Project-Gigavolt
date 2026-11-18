@@ -51,9 +51,9 @@
   <rect x="290" y="132" width="260" height="120" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
   <text x="304" y="156" class="h">Bronze → Silver ETL</text>
   <text x="304" y="176" class="t">raw text landing, typed staging,</text>
-  <text x="304" y="194" class="t">dedup, quarantine with reasons</text>
+  <text x="304" y="194" class="t">latest-wins dedup, quarantine</text>
   <text x="304" y="212" class="t">3NF schema · 0 orphaned FKs</text>
-  <text x="304" y="236" class="tag">sql/01–03 · tools/profile_raw_erp.py</text>
+  <text x="304" y="236" class="tag">sql/01–06 · tools/profile_raw_erp.py</text>
 
   <rect x="290" y="268" width="260" height="140" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
   <text x="304" y="292" class="h">Document pipeline</text>

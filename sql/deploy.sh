@@ -3,7 +3,8 @@
 # Deploy the Gigavolt MariaDB schema and programmability objects in order.
 #
 #   sql/deploy.sh                       # schema + objects, no data
-#   sql/deploy.sh --seed silver.sql     # also load a data-only Silver seed
+#   sql/deploy.sh --raw-dir data/raw/erp  # build Bronze -> Silver from the raw CSVs
+#   sql/deploy.sh --seed silver.sql     # or load a data-only Silver seed instead
 #   sql/deploy.sh --validate            # run the validation suites afterwards
 #
 # Connection settings come from the standard MariaDB client environment / option
@@ -17,13 +18,15 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DATABASE="${MARIADB_DATABASE:-gigavolt}"
 SEED_FILE=""
+RAW_DIR=""
 VALIDATE=false
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --seed)     SEED_FILE="$2"; shift 2 ;;
+        --raw-dir)  RAW_DIR="$2"; shift 2 ;;
         --validate) VALIDATE=true; shift ;;
-        -h|--help)  sed -n '2,16p' "$0"; exit 0 ;;
+        -h|--help)  sed -n '2,17p' "$0"; exit 0 ;;
         *)          echo "Unknown argument: $1" >&2; exit 2 ;;
     esac
 done
@@ -51,7 +54,27 @@ run_sql "$SCRIPT_DIR/00_create_database.sql"
 run_sql "$SCRIPT_DIR/01_bronze_schema.sql"
 run_sql "$SCRIPT_DIR/02_silver_schema.sql"
 run_sql "$SCRIPT_DIR/03_staging_and_quarantine.sql"
+run_sql "$SCRIPT_DIR/04_cleansing_functions.sql"
 run_sql "$SCRIPT_DIR/11_audit_log.sql"
+
+if [[ -n "$SEED_FILE" && -n "$RAW_DIR" ]]; then
+    echo "Use either --seed or --raw-dir, not both" >&2; exit 2
+fi
+
+if [[ -n "$RAW_DIR" ]]; then
+    [[ -f "$RAW_DIR/customers.csv" ]] || { echo "No ERP CSVs in: $RAW_DIR" >&2; exit 1; }
+    # Drop change-capture triggers so the bulk (re)load is not audited;
+    # 12_audit_triggers.sql recreates them below.
+    mariadb "${client_args[@]}" "$DATABASE" -e \
+        "DROP TRIGGER IF EXISTS trg_Dispatches_After_Insert;
+         DROP TRIGGER IF EXISTS trg_Dispatches_Before_Update;"
+    log "Loading Bronze from $RAW_DIR"
+    # LOAD DATA LOCAL resolves the CSV names relative to the working directory.
+    (cd "$RAW_DIR" && mariadb "${client_args[@]}" --local-infile=1 --batch \
+        < "$SCRIPT_DIR/05_load_bronze.sql")
+    log "Cleansing Bronze -> staging -> quarantine -> Silver"
+    mariadb "${client_args[@]}" --batch < "$SCRIPT_DIR/06_cleanse_to_silver.sql"
+fi
 
 if [[ -n "$SEED_FILE" ]]; then
     [[ -f "$SEED_FILE" ]] || { echo "Seed file not found: $SEED_FILE" >&2; exit 1; }
@@ -69,7 +92,8 @@ log "Deployment complete"
 
 if $VALIDATE; then
     failures=0
-    for check in 90_validate_integrity.sql 91_validate_programmability.sql; do
+    for check in 90_validate_integrity.sql 91_validate_programmability.sql \
+                 92_validate_cleansing_functions.sql; do
         log "Running $check"
         output="$(mariadb "${client_args[@]}" --batch --skip-column-names \
                   "$DATABASE" < "$SCRIPT_DIR/$check")"

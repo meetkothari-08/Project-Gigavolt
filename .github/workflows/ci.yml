@@ -37,6 +37,12 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y mariadb-client
       - name: Deploy schema, triggers, procedure and views
         run: sql/deploy.sh
+      - name: Unit-test the cleansing functions
+        run: |
+          mariadb -h 127.0.0.1 -uroot -pci-root --batch --skip-column-names \
+            < sql/92_validate_cleansing_functions.sql > results.tsv
+          cat results.tsv
+          test "$(grep -c 'PASS$' results.tsv)" -eq 15
       - name: Check that every SQL object exists
         run: |
           mariadb -h 127.0.0.1 -uroot -pci-root gigavolt --batch --skip-column-names -e "
@@ -46,7 +52,7 @@ jobs:
               AND (SELECT COUNT(*) FROM information_schema.TRIGGERS
                 WHERE TRIGGER_SCHEMA='gigavolt') = 4
               AND (SELECT COUNT(*) FROM information_schema.ROUTINES
-                WHERE ROUTINE_SCHEMA='gigavolt') = 1
+                WHERE ROUTINE_SCHEMA='gigavolt') = 4
               AND (SELECT COUNT(*) FROM information_schema.VIEWS
                 WHERE TABLE_SCHEMA='gigavolt') = 1,
               'ok', 'missing objects')" | tee /dev/stderr | grep -qx ok

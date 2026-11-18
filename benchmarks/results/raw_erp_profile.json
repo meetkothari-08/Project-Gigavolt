@@ -174,18 +174,14 @@
       "examples": []
     },
     "warranty_claims.dispatch_id -> dispatches": {
-      "blank": 239,
-      "orphaned": 7,
-      "examples": [
-        "NULL"
-      ]
+      "blank": 246,
+      "orphaned": 0,
+      "examples": []
     },
     "warranty_claims.part_id -> parts": {
-      "blank": 348,
-      "orphaned": 13,
-      "examples": [
-        "NULL"
-      ]
+      "blank": 361,
+      "orphaned": 0,
+      "examples": []
     }
   }
 }

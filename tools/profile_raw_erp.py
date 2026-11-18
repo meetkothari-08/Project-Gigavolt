@@ -68,6 +68,7 @@ DATE_PATTERNS = {
     "DD-Mon-YYYY": re.compile(r"^\d{1,2}-[A-Za-z]{3}-\d{4}$"),
 }
 
+NULL_TOKENS = {"NULL", "N/A"}
 HTML_TAG = re.compile(r"<[^>]+>|&[a-z]+;|&#\d+;", re.IGNORECASE)
 CLEAN_NUMBER = re.compile(r"^-?\d+(\.\d+)?$")
 
@@ -151,7 +152,9 @@ def profile_foreign_keys(data: dict[str, list[dict[str, str]]]) -> dict:
     results = {}
     for child, column, parent in FOREIGN_KEYS:
         parent_keys = {row[TABLES[parent]].strip() for row in data[parent]}
+        # Literal null tokens ("NULL", "N/A") are missing values, not orphans.
         values = [(row.get(column) or "").strip() for row in data[child]]
+        values = ["" if v.upper() in NULL_TOKENS else v for v in values]
         missing = [v for v in values if v and v not in parent_keys]
         results[f"{child}.{column} -> {parent}"] = {
             "blank": sum(1 for v in values if not v),

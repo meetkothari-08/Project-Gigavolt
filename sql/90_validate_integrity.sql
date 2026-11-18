@@ -67,4 +67,9 @@ FROM (
     UNION ALL SELECT 'rule: no leading/trailing whitespace in technician',
         (SELECT COUNT(*) FROM dispatches
           WHERE technician <> TRIM(technician)), 0
+    UNION ALL SELECT 'rule: no stray carriage returns (CRLF load defect)',
+        (SELECT COUNT(*) FROM customers WHERE status LIKE CONCAT('%', CHAR(13), '%'))
+      + (SELECT COUNT(*) FROM equipment WHERE location_notes LIKE CONCAT('%', CHAR(13), '%')), 0
+    UNION ALL SELECT 'rule: zip codes are 5 digits',
+        (SELECT COUNT(*) FROM customers WHERE zip NOT REGEXP '^[0-9]{5}$'), 0
 ) AS checks;

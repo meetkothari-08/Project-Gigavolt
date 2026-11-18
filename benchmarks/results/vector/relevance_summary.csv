@@ -1,0 +1,26 @@
+query_id,query,expected_source,hit_at_5,expected_source_rank,reciprocal_rank,expected_source_chunks_in_top5,unique_sources_in_top5
+Q01,What problem and remedy does engineering change order GV-ECO-2024-019 address?,GV-ECO-2024-019,1,3,0.3333333333333333,1,4
+Q02,What change was made to address the chiller relief valve issue?,GV-ECO-2024-031,1,1,1.0,2,4
+Q03,What corrective torque requirements are specified in the re-torque change order?,GV-ECO-2024-044,1,2,0.5,2,3
+Q04,What changes are required for the cabinet door seal?,GV-ECO-2024-052,1,1,1.0,1,5
+Q05,"What happened during the G-3500 thermal incident, and what were the investigation findings?",GV-INC-2024-088,1,1,1.0,1,5
+Q06,"What caused the X-7000 main contactor flashover, and what corrective actions were recommended?",GV-INC-2024-104,1,1,1.0,3,3
+Q07,"What caused the low isolation trip, and what remediation was identified?",GV-INC-2024-119,1,1,1.0,2,4
+Q08,What operating and maintenance procedures are documented for the C-1200?,GV-MAN-C1200-003,1,1,1.0,2,3
+Q09,How should the G-3500 chiller and equipment be operated and maintained?,GV-MAN-G3500-002,1,2,0.5,2,4
+Q10,What operating instructions and safety precautions apply to the X-7000 Megapack?,GV-MAN-X7000-001,1,2,0.5,1,5
+Q11,How should technicians calibrate temperature and voltage measurements?,GV-SOP-CAL-420,1,1,1.0,2,4
+Q12,What are the site acceptance testing and commissioning steps for the X-7000?,GV-SOP-COMM-201,1,1,1.0,1,5
+Q13,What steps are required for end-of-life equipment decommissioning?,GV-SOP-DECOM-601,1,1,1.0,2,3
+Q14,What is the procedure for safely flashing or updating equipment firmware?,GV-SOP-FIRM-105,1,1,1.0,2,4
+Q15,How should technicians troubleshoot chiller and refrigerant system problems?,GV-SOP-HVAC-310,1,1,1.0,1,4
+Q16,What emergency procedures should be followed for a BESS fire or thermal runaway?,GV-SOP-SAFETY-900,1,1,1.0,2,3
+Q17,How should a technician submit and process a field warranty claim?,GV-SOP-WAR-101,1,1,1.0,2,4
+Q18,What are the main subsystems and architectural elements of the battery management system?,GV-SPEC-BMS-ARC-01,1,1,1.0,1,5
+Q19,What technical characteristics and operating limits are specified for the LFP battery cell?,GV-SPEC-CELL-LFP-08,1,2,0.5,1,4
+Q20,What technical specifications apply to the NMC-65 battery cell?,GV-SPEC-CELL-NMC-65,1,1,1.0,2,4
+Q21,What are the specifications and ratings of the DC pyro fuse?,GV-SPEC-FUSE-PYRO-04,1,1,1.0,2,4
+Q22,What properties and temperature limits apply to the glycol heat transfer material?,GV-SPEC-THERM-GLY-02,1,1,1.0,1,5
+Q23,What quality findings or nonconformities were identified in the supplier audit?,GV-SUP-AUD-502,1,1,1.0,2,3
+Q24,How are suppliers and components integrated across the supply chain?,GV-SUP-REP-401,1,1,1.0,3,2
+Q25,What supply chain risks and supplier dependencies are described in the risk assessment?,GV-SUP-REP-409,1,1,1.0,2,3

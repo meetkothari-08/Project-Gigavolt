@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gigavolt"
+version = "1.0.0"
+description = "Multi-model data platform and hybrid RAG engine for battery field service"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pymysql>=1.1",
+    "pymongo>=4.6",
+    "chromadb>=1.0",
+    "httpx>=0.27",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+# Embedding model, PDF extraction and tokenizer (vector/document server).
+ml = [
+    "sentence-transformers>=3.0",
+    "transformers>=4.40",
+    "pymupdf>=1.24",
+    "numpy>=1.26",
+]
+# Notebook analysis.
+analysis = ["pandas>=2.0", "matplotlib>=3.8", "jupyter>=1.0"]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+gigavolt-ask = "gigavolt.cli:main"
+gigavolt-ingest-relational = "gigavolt.ingestion.relational.pipeline:main"
+gigavolt-ingest-documents = "gigavolt.ingestion.documents.pipeline:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "vector_search", "benchmarks"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["vector_search/notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "BLE", "N", "A"]
+ignore = ["B905"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["gigavolt", "_common"]
+
+[tool.ruff.lint.per-file-ignores]
+# Experiment scripts are kept close to the code that produced the recorded
+# results. Their search() closures are invoked inside the same loop iteration.
+"vector_search/*.py" = ["E501", "B023", "B007", "BLE001"]

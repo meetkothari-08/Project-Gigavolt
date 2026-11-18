@@ -1,0 +1,41 @@
+# First full run: all 9,296 Silver records validated and baselined; 6 audit events consumed (2026-11-12)
+2026-11-12 15:42:36,872 | INFO | Audit event 1 | INSERT | New dispatch record created: TEST-DISP-001
+2026-11-12 15:42:36,872 | INFO | Audit event 2 | UPDATE | Dispatch record updated: TEST-DISP-001
+2026-11-12 15:42:36,872 | INFO | Audit event 3 | INSERT | New dispatch record created: TEST-VIDEO-001
+2026-11-12 15:42:36,872 | INFO | Audit event 4 | UPDATE | Dispatch record updated: TEST-VIDEO-001
+2026-11-12 15:42:36,872 | INFO | Audit event 5 | INSERT | New dispatch record created: TEST-VIDEO-001
+2026-11-12 15:42:36,873 | INFO | Audit event 6 | UPDATE | Dispatch record updated: TEST-VIDEO-001
+2026-11-12 15:42:36,878 | INFO | Relational pipeline completed
+2026-11-12 15:42:36,878 | INFO | new: 9296
+2026-11-12 15:42:36,878 | INFO | modified: 0
+2026-11-12 15:42:36,878 | INFO | unchanged: 0
+2026-11-12 15:42:36,878 | INFO | processed: 9296
+2026-11-12 15:42:36,878 | INFO | invalid: 0
+2026-11-12 15:42:36,878 | INFO | failed: 0
+2026-11-12 15:42:36,879 | INFO | audit_events: 6
+
+# EQ-5508 modified, pipeline run; then value restored, pipeline run again (2026-11-14)
+2026-11-14 21:00:06,261 | INFO | Starting relational pipeline
+2026-11-14 21:00:06,261 | INFO | Dry-run mode: False
+2026-11-14 21:00:06,750 | INFO | Detected 1 candidate changes in equipment
+2026-11-14 21:00:06,756 | INFO | Processed equipment record: EQ-5508
+2026-11-14 21:00:06,759 | INFO | Relational pipeline completed
+2026-11-14 21:00:06,759 | INFO | new: 0
+2026-11-14 21:00:06,759 | INFO | modified: 1
+2026-11-14 21:00:06,759 | INFO | unchanged: 0
+2026-11-14 21:00:06,759 | INFO | processed: 1
+2026-11-14 21:00:06,759 | INFO | invalid: 0
+2026-11-14 21:00:06,759 | INFO | failed: 0
+2026-11-14 21:00:06,759 | INFO | audit_events: 0
+2026-11-14 21:00:06,941 | INFO | Starting relational pipeline
+2026-11-14 21:00:06,942 | INFO | Dry-run mode: False
+2026-11-14 21:00:07,355 | INFO | Detected 1 candidate changes in equipment
+2026-11-14 21:00:07,361 | INFO | Processed equipment record: EQ-5508
+2026-11-14 21:00:07,363 | INFO | Relational pipeline completed
+2026-11-14 21:00:07,363 | INFO | new: 0
+2026-11-14 21:00:07,363 | INFO | modified: 1
+2026-11-14 21:00:07,363 | INFO | unchanged: 0
+2026-11-14 21:00:07,364 | INFO | processed: 1
+2026-11-14 21:00:07,364 | INFO | invalid: 0
+2026-11-14 21:00:07,364 | INFO | failed: 0
+2026-11-14 21:00:07,364 | INFO | audit_events: 0

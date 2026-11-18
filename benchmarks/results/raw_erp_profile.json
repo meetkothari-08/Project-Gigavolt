@@ -1,0 +1,191 @@
+{
+  "tables": {
+    "customers": {
+      "rows": 525,
+      "distinct_keys": 500,
+      "duplicate_key_rows": 25,
+      "blank_keys": 0,
+      "cells_with_html": 111,
+      "cells_with_padding": 152,
+      "date_formats": {
+        "created_date": {
+          "MM/DD/YYYY": 178,
+          "ISO-8601 timestamp": 101,
+          "MM-DD-YYYY": 94,
+          "YYYY/MM/DD": 84,
+          "YYYY-MM-DD": 68
+        }
+      },
+      "non_numeric_values": {},
+      "casing_variants": {
+        "status": {
+          "active": [
+            "Active",
+            "active"
+          ],
+          "inactive": [
+            "Inactive",
+            "inactive"
+          ]
+        }
+      }
+    },
+    "equipment": {
+      "rows": 2575,
+      "distinct_keys": 2500,
+      "duplicate_key_rows": 75,
+      "blank_keys": 0,
+      "cells_with_html": 286,
+      "cells_with_padding": 98,
+      "date_formats": {
+        "install_date": {
+          "MM/DD/YYYY": 822,
+          "ISO-8601 timestamp": 446,
+          "YYYY-MM-DD": 446,
+          "YYYY/MM/DD": 438,
+          "MM-DD-YYYY": 423
+        },
+        "warranty_expiration": {
+          "MM/DD/YYYY": 864,
+          "YYYY-MM-DD": 434,
+          "MM-DD-YYYY": 430,
+          "YYYY/MM/DD": 424,
+          "ISO-8601 timestamp": 423
+        }
+      },
+      "non_numeric_values": {},
+      "casing_variants": {
+        "status": {
+          "in service": [
+            "IN SERVICE",
+            "In Service",
+            "in service"
+          ],
+          "decommissioned": [
+            "Decommissioned",
+            "decommissioned"
+          ]
+        }
+      }
+    },
+    "dispatches": {
+      "rows": 5000,
+      "distinct_keys": 5000,
+      "duplicate_key_rows": 0,
+      "blank_keys": 0,
+      "cells_with_html": 597,
+      "cells_with_padding": 780,
+      "date_formats": {
+        "dispatch_date": {
+          "MM/DD/YYYY": 1609,
+          "ISO-8601 timestamp": 857,
+          "YYYY/MM/DD": 855,
+          "YYYY-MM-DD": 848,
+          "MM-DD-YYYY": 831
+        }
+      },
+      "non_numeric_values": {
+        "labor_cost": {
+          "count": 256,
+          "examples": [
+            "$1,005.00",
+            "$1,054.50",
+            "$1,102.00",
+            "$1,111.50",
+            "$1,125.00"
+          ]
+        }
+      },
+      "casing_variants": {
+        "status": {
+          "completed": [
+            "COMPLETED",
+            "Completed",
+            "completed"
+          ]
+        }
+      }
+    },
+    "parts": {
+      "rows": 150,
+      "distinct_keys": 150,
+      "duplicate_key_rows": 0,
+      "blank_keys": 0,
+      "cells_with_html": 0,
+      "cells_with_padding": 17,
+      "date_formats": {},
+      "non_numeric_values": {},
+      "casing_variants": {}
+    },
+    "warranty_claims": {
+      "rows": 1248,
+      "distinct_keys": 1200,
+      "duplicate_key_rows": 48,
+      "blank_keys": 0,
+      "cells_with_html": 154,
+      "cells_with_padding": 176,
+      "date_formats": {
+        "claim_date": {
+          "MM/DD/YYYY": 425,
+          "MM-DD-YYYY": 216,
+          "ISO-8601 timestamp": 215,
+          "YYYY/MM/DD": 196,
+          "YYYY-MM-DD": 196
+        }
+      },
+      "non_numeric_values": {
+        "approved_amount": {
+          "count": 491,
+          "examples": [
+            "NULL"
+          ]
+        }
+      },
+      "casing_variants": {
+        "status": {
+          "approved": [
+            "APPROVED",
+            "Approved"
+          ]
+        }
+      }
+    }
+  },
+  "foreign_keys": {
+    "equipment.customer_id -> customers": {
+      "blank": 0,
+      "orphaned": 0,
+      "examples": []
+    },
+    "dispatches.equipment_id -> equipment": {
+      "blank": 0,
+      "orphaned": 59,
+      "examples": [
+        "EQ-99009",
+        "EQ-99045",
+        "EQ-99052",
+        "EQ-99053",
+        "EQ-99071"
+      ]
+    },
+    "warranty_claims.equipment_id -> equipment": {
+      "blank": 0,
+      "orphaned": 0,
+      "examples": []
+    },
+    "warranty_claims.dispatch_id -> dispatches": {
+      "blank": 239,
+      "orphaned": 7,
+      "examples": [
+        "NULL"
+      ]
+    },
+    "warranty_claims.part_id -> parts": {
+      "blank": 348,
+      "orphaned": 13,
+      "examples": [
+        "NULL"
+      ]
+    }
+  }
+}

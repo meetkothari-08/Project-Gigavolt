@@ -1,0 +1,17 @@
+# HTTP trigger for incremental document ingestion (vector/document server).
+# Requires M6_API_KEY in the EnvironmentFile.
+[Unit]
+Description=Gigavolt document ingestion API
+After=network-online.target gigavolt-chroma.service
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/gigavolt
+EnvironmentFile=/opt/gigavolt/.env
+ExecStart=/opt/gigavolt/.venv/bin/python -m gigavolt.services.ingestion_api
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

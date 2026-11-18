@@ -1,0 +1,181 @@
+{
+  "source_directory": "documents",
+  "tokenizer_model": "intfloat/e5-small-v2",
+  "target_chunk_tokens": 300,
+  "target_overlap_tokens": 50,
+  "pdf_count": 25,
+  "total_pages": 54,
+  "pages_with_text": 53,
+  "total_chunks": 64,
+  "chunk_token_statistics": {
+    "min": 63,
+    "max": 300,
+    "average": 249.94
+  },
+  "overlap_statistics": {
+    "adjacent_pairs": 39,
+    "min": 50,
+    "max": 63,
+    "average": 54.41,
+    "pairs_with_at_least_25_tokens": 39
+  },
+  "low_text_pages": [
+    {
+      "source_filename": "GV-SPEC-BMS-ARC-01 System Architecture.pdf",
+      "page_number": 2,
+      "character_count": 0
+    }
+  ],
+  "documents": [
+    {
+      "source_filename": "GV-ECO-2024-019 Engineering Change Order.pdf",
+      "source_path": "Unstructured Data/GV-ECO-2024-019 Engineering Change Order.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-ECO-2024-031 Change Order - Chiller Relief Valve.pdf",
+      "source_path": "Unstructured Data/GV-ECO-2024-031 Change Order - Chiller Relief Valve.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-ECO-2024-044 Change Order Re-torque.pdf",
+      "source_path": "Unstructured Data/GV-ECO-2024-044 Change Order Re-torque.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-ECO-2024-052 Change Order Cabinet Door Seal.pdf",
+      "source_path": "Unstructured Data/GV-ECO-2024-052 Change Order Cabinet Door Seal.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-INC-2024-088 Field Incident Investigation Report.pdf",
+      "source_path": "Unstructured Data/GV-INC-2024-088 Field Incident Investigation Report.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-INC-2024-104 Field Incident Report Contactor Flashover.pdf",
+      "source_path": "Unstructured Data/GV-INC-2024-104 Field Incident Report Contactor Flashover.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-INC-2024-119 Field Incident Low Isolation Trip.pdf",
+      "source_path": "Unstructured Data/GV-INC-2024-119 Field Incident Low Isolation Trip.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-MAN-C1200-003 Manual.pdf",
+      "source_path": "Unstructured Data/GV-MAN-C1200-003 Manual.pdf",
+      "pages": 4,
+      "chunks": 4
+    },
+    {
+      "source_filename": "GV-MAN-G3500-002 Manual.pdf",
+      "source_path": "Unstructured Data/GV-MAN-G3500-002 Manual.pdf",
+      "pages": 4,
+      "chunks": 4
+    },
+    {
+      "source_filename": "GV-MAN-X7000-001 Manual.pdf",
+      "source_path": "Unstructured Data/GV-MAN-X7000-001 Manual.pdf",
+      "pages": 4,
+      "chunks": 5
+    },
+    {
+      "source_filename": "GV-SOP-CAL-420 SOP Temperature and Voltage Calibration.pdf",
+      "source_path": "Unstructured Data/GV-SOP-CAL-420 SOP Temperature and Voltage Calibration.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SOP-COMM-201 SOP Megapack X-7000 SAT.pdf",
+      "source_path": "Unstructured Data/GV-SOP-COMM-201 SOP Megapack X-7000 SAT.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-SOP-DECOM-601 SOP EOL Decomissioning.pdf",
+      "source_path": "Unstructured Data/GV-SOP-DECOM-601 SOP EOL Decomissioning.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SOP-FIRM-105 SOP Firmware Flashing.pdf",
+      "source_path": "Unstructured Data/GV-SOP-FIRM-105 SOP Firmware Flashing.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SOP-HVAC-310 SOP PowerStation Chiller and Refrigerant.pdf",
+      "source_path": "Unstructured Data/GV-SOP-HVAC-310 SOP PowerStation Chiller and Refrigerant.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SOP-SAFETY-900 SOP BESS Emergency Response and Fire Safety.pdf",
+      "source_path": "Unstructured Data/GV-SOP-SAFETY-900 SOP BESS Emergency Response and Fire Safety.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SOP-WAR-101 SOP Field Warranty Claims.pdf",
+      "source_path": "Unstructured Data/GV-SOP-WAR-101 SOP Field Warranty Claims.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-SPEC-BMS-ARC-01 System Architecture.pdf",
+      "source_path": "Unstructured Data/GV-SPEC-BMS-ARC-01 System Architecture.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SPEC-CELL-LFP-08 Datasheet.pdf",
+      "source_path": "Unstructured Data/GV-SPEC-CELL-LFP-08 Datasheet.pdf",
+      "pages": 2,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SPEC-CELL-NMC-65 Datasheet.pdf",
+      "source_path": "Unstructured Data/GV-SPEC-CELL-NMC-65 Datasheet.pdf",
+      "pages": 1,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SPEC-FUSE-PYRO-04 Component Specification DC Fuses.pdf",
+      "source_path": "Unstructured Data/GV-SPEC-FUSE-PYRO-04 Component Specification DC Fuses.pdf",
+      "pages": 1,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SPEC-THERM-GLY-02 Material Specification Heat Transfer Unit.pdf",
+      "source_path": "Unstructured Data/GV-SPEC-THERM-GLY-02 Material Specification Heat Transfer Unit.pdf",
+      "pages": 1,
+      "chunks": 2
+    },
+    {
+      "source_filename": "GV-SUP-AUD-502 Quality Audit Report QA Assessment.pdf",
+      "source_path": "Unstructured Data/GV-SUP-AUD-502 Quality Audit Report QA Assessment.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-SUP-REP-401 Supply Chain Integration Brief.pdf",
+      "source_path": "Unstructured Data/GV-SUP-REP-401 Supply Chain Integration Brief.pdf",
+      "pages": 2,
+      "chunks": 3
+    },
+    {
+      "source_filename": "GV-SUP-REP-409 Supply Chain Risk Assessment.pdf",
+      "source_path": "Unstructured Data/GV-SUP-REP-409 Supply Chain Risk Assessment.pdf",
+      "pages": 3,
+      "chunks": 2
+    }
+  ]
+}

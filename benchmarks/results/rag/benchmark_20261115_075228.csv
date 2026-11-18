@@ -1,0 +1,90 @@
+question_id,question,status,latency_seconds,generation_seconds,retrieval_approx_seconds,documents,mariadb_records,mongodb_records,citation_count,citations_present,all_citations_valid,retrieval_errors,answer,model
+1,What are the documented warranty requirements for equipment?,success,17.8,17.62,0.18,3,0,0,3,True,True,[],"[Standard Operating Procedure: Field Warranty Claims &\n\nTechnician Dispatch Protocol\n\n● Did operational telemetry log continuous discharge at > 1.2 C in ambient\n\nenvironments > 40 °C?\n\n● If yes: Inform customer of operational warranty breach under Section 4.3\n\n(Operating Thermal Boundaries).\n\n3. Inspect individual module drift:\
+
+Retrieved Sources: [76917ae9a207945c-c0001], [78f91fa4f8d1d18f-c0004], [f3159dbf5de4b71b-c0002]",qwen2.5:0.5b
+2,What procedures should technicians follow when investigating a field failure?,success,13.14,13.07,0.07,3,0,0,3,True,True,[],"[Standard Operating Procedure: Field Warranty Claims & Diagnostic Indicators
+Measure insulation resistance between negative DC bus and chassis ground.
+Is the fault on the DC side or the Inverter side?
+If DC side reads > 100 MΩ to ground when isolated, fault is internal to Inverter INV-3500-AC. Check output IGBT snubber capacitors.
+If fault isol
+
+Retrieved Sources: [76917ae9a207945c-c0001], [57bc06fd62b548ac-c0004], [4d6f6c6700360a63-c0003]",qwen2.5:0.5b
+3,What are the important safety precautions during equipment maintenance?,success,13.19,13.14,0.05,3,0,0,3,True,False,[],"[STAGE 4: FIRST RESPONDER HANDOVER
+●​ Did operational telemetry log continuous discharge at > 1.2 C in ambient environments > 40 °C?
+●​ If yes: Inform customer of operational warranty breach under Section 4.3 (Operating Thermal Boundaries).]
+[STAGE 4: FIRST RESPONDER HANDOVER
+●​ Did operational telemetry
+
+Retrieved Sources: [76917ae9a207945c-c0003], [6af3a175b309882f-c0002], [78f91fa4f8d1d18f-c0004]",qwen2.5:0.5b
+4,What documentation describes inverter firmware requirements?,success,12.01,11.95,0.06,3,0,0,3,True,False,[],"[Inverter ERR_INV_404, Inverter DSP firmware must be updated to version v2.4.11-b or later to adjust commut, Standard Operating Procedure: Local & Remote BMS Firmware, Flashing via Service Tool v4.1]
+
+Retrieved Sources: [f3159dbf5de4b71b-c0002], [76917ae9a207945c-c0002], [6bb4c0e12ba89704-c0001]",qwen2.5:0.5b
+5,What are the documented procedures for temperature and voltage calibration?,success,13.29,13.23,0.06,3,0,0,3,True,False,[],"[Standard Operating Procedure: Multi-Point Temperature & Cell
+Voltage Sense Harness Calibration
+Scope and Objective: This Standard Operating Procedure defines the annual calibration, drift assessment, and validation protocol for high-precision voltage sense taps and multi-point NTC thermistor wiris.]
+
+[Terminal Pair (Cell 1 through Cell 24)
+Read open-circuit voltage simultaneously via service software telemetry and reference meter.
+
+Retrieved Sources: [d966296c5413961c-c0001], [4d6f6c6700360a63-c0005], [d966296c5413961c-c0002]",qwen2.5:0.5b
+6,What information is available about emergency response procedures?,success,13.46,13.41,0.05,3,0,0,3,True,True,[],"[Standard Operating Procedure: Battery Energy Storage System (BESS) Emergency Response and Fire Safety
+Purpose & Scope: This Standard Operating Procedure (SOP) governs emergency operations across all Gigavolt energy platforms, including utility installations (X-7000), commercial systems (G-3500), and a utility grid. The SOP includes a first responder handover procedure that involves
+
+Retrieved Sources: [6af3a175b309882f-c0001], [6af3a175b309882f-c0002], [4d6f6c6700360a63-c0002]",qwen2.5:0.5b
+7,What are the documented requirements for battery management system maintenance?,success,13.0,12.95,0.05,3,0,0,3,True,True,[],"[Standard Operating Procedure: Battery Management System Maintenance
+Purpose & Scope: This Standard Operating Procedure (SOP) governs emergency operations across all Gigavolt energy platforms, including utility installations (X-7000), commercial systems (G-3500), and a master and slave BMS. The SOP establishes technical and environmental safety protocols for decommissioning and disassembling grid
+
+Retrieved Sources: [6af3a175b309882f-c0001], [e2789c242e419f24-c0001], [5ce904aba9239893-c0001]",qwen2.5:0.5b
+8,What does the documentation say about equipment commissioning?,success,12.88,12.84,0.04,3,0,0,3,True,True,[],"[Standard Operating Procedure: PowerStation G-3500 HVAC\nChiller Diagnostics & Refrigerant Recovery\nPurpose\nThis standard operating procedure provides step-by-step diagnostic and field repair instructions for resolving chiller compressor overload alerts (ERR_HVAC_502) and low refrigeration\n\nefficacy. Standard Operating Procedure: Field Warranty Claims &\n\nTechnician Dispatch
+
+Retrieved Sources: [76917ae9a207945c-c0003], [7a7a49bf233e548f-c0001], [76917ae9a207945c-c0001]",qwen2.5:0.5b
+9,What supplier risks are documented for lithium cell components?,success,16.72,16.67,0.05,3,5,0,5,True,False,[],"[Part 1: Documentation of Lithium Cell Component Risks]
+
+1) SinoPower Extrusions certified.
+2) Apex 9001 (Supplier-C).
+3) PowerElec (Supplier-C).
+4) DisplayTech (Supplier-C).
+5) SinoPower Extrusions certified.
+6) Apex 9001 (Supplier-C).
+7) PowerElec (Supplier
+
+Retrieved Sources: [46a847fa0307382f-c0001], [7666bc666686b437-c0001], [46a847fa0307382f-c0002], [part:PRT-2007], [part:PRT-2009]",qwen2.5:0.5b
+10,Which lithium cell components and suppliers are listed in the database?,success,16.52,16.48,0.04,3,5,0,5,True,False,[],"[PowerElec, SinoPower Cell Foundry (Gigavolt Supplier ID: SUP-SPC-11), 342, 38, Lithium Cell Array Model-MAX, 198, 18, Lithium Cell Module 48V Model-A, 198, 18]
+
+Retrieved Sources: [7666bc666686b437-c0001], [46a847fa0307382f-c0001], [cbee326872607e28-c0001], [part:PRT-2007], [part:PRT-2009]",qwen2.5:0.5b
+11,Which inventory parts are currently below their reorder levels?,success,14.15,14.1,0.05,3,5,0,5,True,False,[],"[INV-SCR-9901, part:PRT-2006, part:PRT-2040]
+
+Retrieved Sources: [7666bc666686b437-c0003], [46a847fa0307382f-c0002], [7666bc666686b437-c0001], [part:PRT-2006], [part:PRT-2040]",qwen2.5:0.5b
+12,What parts have low stock and may require replenishment?,success,18.0,17.95,0.05,3,5,0,5,True,True,[],"[Supplier-B, Tier-1/Tier-2, 1) / Apex 9001, 2) / Apex 9001, 3) / Apex 9001, 4) / Apex 9001, 5) / Apex 9001, 6) / Apex 9001, 7
+
+Retrieved Sources: [5ce904aba9239893-c0002], [46a847fa0307382f-c0002], [7666bc666686b437-c0001], [part:PRT-2006], [part:PRT-2040]",qwen2.5:0.5b
+13,What diagnostic information is available for the X-7000 model?,success,12.62,12.49,0.13,3,0,3,6,True,False,[],"[telemetry:6adf887c245b70a8a7b2a560, telemetry:6adf887c245b70a8a7b2a559]
+
+Retrieved Sources: [bda59a571b6e403b-c0001], [4d6f6c6700360a63-c0001], [533c7074e9d6112a-c0002], [telemetry:6adf887c245b70a8a7b2a563], [telemetry:6adf887c245b70a8a7b2a560], [telemetry:6adf887c245b70a8a7b2a559]",qwen2.5:0.5b
+14,Are there high-temperature telemetry observations for the X-7000?,success,4.2,4.15,0.05,3,0,3,6,True,False,[],"[telemetry:6adf887c245b70a8a7b2a560, telemetry:6adf887c245b70a8a7b2a559]
+
+Retrieved Sources: [bda59a571b6e403b-c0001], [4d6f6c6700360a63-c0001], [78f91fa4f8d1d18f-c0004], [telemetry:6adf887c245b70a8a7b2a563], [telemetry:6adf887c245b70a8a7b2a560], [telemetry:6adf887c245b70a8a7b2a559]",qwen2.5:0.5b
+15,What fault conditions have been recorded for the X-7000?,success,4.2,4.15,0.05,3,0,3,6,True,False,[],"[telemetry:6adf887c245b70a8a7b2a560, telemetry:6adf887c245b70a8a7b2a559]
+
+Retrieved Sources: [bda59a571b6e403b-c0001], [4d6f6c6700360a63-c0001], [2413feda8dc061df-c0001], [telemetry:6adf887c245b70a8a7b2a563], [telemetry:6adf887c245b70a8a7b2a560], [telemetry:6adf887c245b70a8a7b2a559]",qwen2.5:0.5b
+16,What technical documentation could help investigate an electrical fault?,success,14.13,14.08,0.05,3,0,0,3,True,True,[],"●​ Did operational telemetry log continuous discharge at > 1.2 C in ambient environments > 40 °C?
+●​ If yes: Inform customer of operational warranty breach under Section 4.3
+(Operating Thermal Boundaries).
+●​ Did visual inspection of external seals, desiccant breather check, torque audit on low-voltage signal wiring harnesses?
+●​ Measure open
+
+Retrieved Sources: [78f91fa4f8d1d18f-c0004], [4d6f6c6700360a63-c0005], [e2789c242e419f24-c0002]",qwen2.5:0.5b
+17,What information is available about equipment warranty claims?,success,13.82,13.77,0.05,3,0,0,3,True,True,[],"[Standard Operating Procedure: Field Warranty Claims & Inverter ERR_INV_404 IGBT Covered under Upgrade kit, Commutation / breakdown, ECO-2024-019 RET-X7-019, Surge transient grid program. issued at zero trip. Charge to customer. User Abuse / ERR_VOLT_102 SoC held below Rejected / Out of
+
+Retrieved Sources: [76917ae9a207945c-c0001], [76917ae9a207945c-c0002], [78f91fa4f8d1d18f-c0003]",qwen2.5:0.5b
+18,How can maintenance history help investigate recurring equipment failures?,success,14.23,14.19,0.04,3,0,0,3,True,True,[],"● Maintenance history can help investigate recurring equipment failures by identifying operational telemetry logs indicating continuous discharge at > 1.2 C in ambient environments > 40 °C. If this is confirmed, it suggests a potential operational warranty breach under Section 4.3. The customer should be informed of this breach and the need for a customer service representative to address the issue. Additionally, the telemetry logs can
+
+Retrieved Sources: [78f91fa4f8d1d18f-c0004], [78f91fa4f8d1d18f-c0003], [57bc06fd62b548ac-c0004]",qwen2.5:0.5b
+19,What evidence is available about supplier quality and inspection requirements?,success,16.94,16.9,0.04,3,5,0,5,True,True,[],"[Supplier Quality Audit Report: Tier-2 SinoPower Cell Foundry QA, Supplier-C, SinoPower Cell Foundry (Gigavolt Supplier ID: SUP-SPC-11), Tier-1 to Tier-3 Traceability Matrix, PowerElec, 342, 38, Solid Lithium Cell Array Model-MAX, Lithium Cell Module
+
+Retrieved Sources: [cbee326872607e28-c0001], [7666bc666686b437-c0001], [46a847fa0307382f-c0001], [part:PRT-2007], [part:PRT-2009]",qwen2.5:0.5b
+20,"Summarize the available technical documentation, maintenance information, and telemetry relevant to equipment reliability.",success,14.56,14.51,0.05,3,0,0,3,True,True,[],"● Operational telemetry logs indicate continuous discharge at > 1.2 C in ambient environments > 40 °C. If yes, inform the customer of an operational warranty breach under Section 4.3. The operational thermal boundaries are specified in Section 4.3.
+
+● The inverter is marked with ERR_INV_404, IGBT covered under a upgrade kit, and a surge
+
+Retrieved Sources: [78f91fa4f8d1d18f-c0004], [76917ae9a207945c-c0002], [78f91fa4f8d1d18f-c0003]",qwen2.5:0.5b

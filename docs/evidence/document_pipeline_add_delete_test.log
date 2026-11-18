@@ -1,0 +1,23 @@
+2026-11-14 21:10:44,453 | INFO | Starting document ingestion
+2026-11-14 21:10:44,453 | INFO | Apply mode: True
+2026-11-14 21:10:44,453 | INFO | PDF files discovered: 25
+2026-11-14 21:10:44,460 | INFO | Existing collection count: 64
+2026-11-14 21:10:44,497 | INFO | Document pipeline summary: {'discovered': 25, 'new': 0, 'modified': 0, 'unchanged': 25, 'failed': 0, 'chunks_indexed': 0}
+2026-11-14 21:10:44,498 | INFO | Final ChromaDB count: 64
+2026-11-14 21:12:17,405 | INFO | Loading tokenizer and embedding model: intfloat/e5-small-v2
+2026-11-14 21:12:18,490 | INFO | Starting document ingestion
+2026-11-14 21:12:18,490 | INFO | Apply mode: True
+2026-11-14 21:12:18,490 | INFO | PDF files discovered: 26
+2026-11-14 21:12:18,503 | INFO | Existing collection count: 64
+2026-11-14 21:12:18,516 | INFO | NEW: M6_Test/M6_TEMP_INCREMENTAL_TEST.pdf
+2026-11-14 21:12:19,751 | INFO | Prepared 2 chunks for M6_Test/M6_TEMP_INCREMENTAL_TEST.pdf
+2026-11-14 21:12:20,014 | INFO | INDEXED: M6_Test/M6_TEMP_INCREMENTAL_TEST.pdf | new chunks=2 | previous chunks=0 | obsolete removed=0
+2026-11-14 21:12:20,050 | INFO | Document pipeline summary: {'discovered': 26, 'new': 1, 'modified': 0, 'unchanged': 25, 'failed': 0, 'chunks_indexed': 2}
+2026-11-14 21:12:20,065 | INFO | Final ChromaDB count: 66
+2026-11-14 21:12:20,069 | INFO | Starting document ingestion
+2026-11-14 21:12:20,069 | INFO | Apply mode: True
+2026-11-14 21:12:20,069 | INFO | PDF files discovered: 25
+2026-11-14 21:12:20,070 | INFO | Existing collection count: 66
+2026-11-14 21:12:20,122 | INFO | DELETED: M6_Test/M6_TEMP_INCREMENTAL_TEST.pdf | removed vectors=2
+2026-11-14 21:12:20,122 | INFO | Document pipeline summary: {'discovered': 25, 'new': 0, 'modified': 0, 'unchanged': 25, 'failed': 0, 'chunks_indexed': 0}
+2026-11-14 21:12:20,123 | INFO | Final ChromaDB count: 64

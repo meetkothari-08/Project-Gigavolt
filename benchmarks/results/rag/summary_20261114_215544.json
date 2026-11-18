@@ -1,0 +1,16 @@
+{
+    "timestamp": "2026-11-14T22:00:47.292716",
+    "total_questions": 20,
+    "successful_requests": 20,
+    "failed_requests": 0,
+    "requests_with_retrieval_errors": 0,
+    "average_latency_seconds": 15.1525,
+    "p50_latency_seconds": 15.0,
+    "p95_latency_seconds": 19.922,
+    "p99_latency_seconds": 20.4084,
+    "average_generation_seconds": 15.104499999999998,
+    "throughput_requests_per_second": 0.06599682715290502,
+    "citation_presence_rate": 1.0,
+    "valid_citation_rate": 0.55,
+    "total_execution_seconds": 303.04487143999995
+}

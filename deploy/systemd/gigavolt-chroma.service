@@ -1,0 +1,15 @@
+# ChromaDB HTTP server over the persistent vector store (vector/document server).
+[Unit]
+Description=Gigavolt ChromaDB server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/gigavolt
+ExecStart=/opt/gigavolt/.venv/bin/chroma run --host 0.0.0.0 --port 8000 --path /opt/gigavolt/data/chroma_store
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

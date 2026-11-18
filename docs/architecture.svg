@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title { font-size: 22px; font-weight: 700; fill: #0f172a; }
+      .sub { font-size: 13px; fill: #475569; }
+      .zone { font-size: 13px; font-weight: 700; fill: #334155; letter-spacing: .06em; }
+      .h { font-size: 14px; font-weight: 700; fill: #0f172a; }
+      .t { font-size: 12px; fill: #334155; }
+      .tag { font-size: 11px; fill: #64748b; }
+      .edge { stroke: #475569; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+      .dash { stroke-dasharray: 5 4; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="40" y="44" class="title">Gigavolt: multi-model data platform and hybrid RAG engine</text>
+  <text x="40" y="66" class="sub">Raw ERP, documents and telemetry → validated stores → hybrid retrieval → cited answers, with incremental ingestion keeping every store current</text>
+
+  <!-- Zone backgrounds -->
+  <rect x="30" y="90" width="220" height="580" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="50" y="116" class="zone">SOURCES</text>
+  <rect x="270" y="90" width="300" height="580" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="290" y="116" class="zone">INGESTION &amp; QUALITY</text>
+  <rect x="590" y="90" width="270" height="580" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="610" y="116" class="zone">STORES</text>
+  <rect x="880" y="90" width="290" height="580" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="900" y="116" class="zone">RAG SERVING</text>
+
+  <!-- Sources -->
+  <rect x="50" y="140" width="180" height="92" rx="10" fill="#fff7ed" stroke="#fb923c"/>
+  <text x="64" y="164" class="h">ERP extracts (CSV)</text>
+  <text x="64" y="184" class="t">5 tables · 9,498 raw rows</text>
+  <text x="64" y="202" class="t">mixed dates, HTML, dupes,</text>
+  <text x="64" y="220" class="t">currency strings, orphans</text>
+
+  <rect x="50" y="300" width="180" height="92" rx="10" fill="#fff7ed" stroke="#fb923c"/>
+  <text x="64" y="324" class="h">Technical PDFs</text>
+  <text x="64" y="344" class="t">25 docs · 54 pages</text>
+  <text x="64" y="362" class="t">manuals, SOPs, datasheets,</text>
+  <text x="64" y="380" class="t">change orders, incidents</text>
+
+  <rect x="50" y="470" width="180" height="78" rx="10" fill="#fff7ed" stroke="#fb923c"/>
+  <text x="64" y="494" class="h">BMS telemetry (JSON)</text>
+  <text x="64" y="514" class="t">voltage, temperature,</text>
+  <text x="64" y="532" class="t">SoC, fault codes</text>
+
+  <!-- Ingestion -->
+  <rect x="290" y="132" width="260" height="120" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="304" y="156" class="h">Bronze → Silver ETL</text>
+  <text x="304" y="176" class="t">raw text landing, typed staging,</text>
+  <text x="304" y="194" class="t">dedup, quarantine with reasons</text>
+  <text x="304" y="212" class="t">3NF schema · 0 orphaned FKs</text>
+  <text x="304" y="236" class="tag">sql/01–03 · tools/profile_raw_erp.py</text>
+
+  <rect x="290" y="268" width="260" height="140" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="304" y="292" class="h">Document pipeline</text>
+  <text x="304" y="312" class="t">PyMuPDF → sentence-aware chunks</text>
+  <text x="304" y="330" class="t">(≤300 tokens, ~50 overlap) →</text>
+  <text x="304" y="348" class="t">E5-small-v2 passage embeddings</text>
+  <text x="304" y="366" class="t">SHA-256 change detection: add /</text>
+  <text x="304" y="384" class="t">modify / delete kept in sync</text>
+  <text x="304" y="400" class="tag">ingestion/documents · vector_search/</text>
+
+  <rect x="290" y="424" width="260" height="110" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="304" y="448" class="h">Relational change detection</text>
+  <text x="304" y="468" class="t">row hashes vs SQLite state →</text>
+  <text x="304" y="486" class="t">NEW / MODIFIED → validate →</text>
+  <text x="304" y="504" class="t">audit-log checkpoint</text>
+  <text x="304" y="522" class="tag">ingestion/relational</text>
+
+  <rect x="290" y="550" width="260" height="100" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="304" y="574" class="h">SQL programmability</text>
+  <text x="304" y="594" class="t">generated service context, RAG</text>
+  <text x="304" y="612" class="t">payload procedure, audit triggers,</text>
+  <text x="304" y="630" class="t">immutable log, masked view</text>
+
+  <!-- Stores -->
+  <rect x="610" y="132" width="230" height="150" rx="10" fill="#ecfdf5" stroke="#34d399"/>
+  <text x="624" y="156" class="h">MariaDB · ERP Silver</text>
+  <text x="624" y="176" class="t">customers · equipment · models</text>
+  <text x="624" y="194" class="t">dispatches · parts · claims</text>
+  <text x="624" y="212" class="t">9,296 rows · Audit_Logs</text>
+  <text x="624" y="236" class="t">HA: 3-node Galera cluster,</text>
+  <text x="624" y="254" class="t">manual bootstrap, ColumnStore</text>
+  <text x="624" y="272" class="tag">OLTP + OLAP comparison</text>
+
+  <rect x="610" y="300" width="230" height="120" rx="10" fill="#ecfdf5" stroke="#34d399"/>
+  <text x="624" y="324" class="h">ChromaDB · documents</text>
+  <text x="624" y="344" class="t">64 chunks · 384-d cosine</text>
+  <text x="624" y="362" class="t">HNSW M=8, ef_c=50, ef_s=20</text>
+  <text x="624" y="380" class="t">Recall@5 = 1.0 · P50 ≈ 2 ms</text>
+  <text x="624" y="404" class="tag">+ embedding API :8001</text>
+
+  <rect x="610" y="440" width="230" height="100" rx="10" fill="#ecfdf5" stroke="#34d399"/>
+  <text x="624" y="464" class="h">MongoDB · telemetry</text>
+  <text x="624" y="484" class="t">by equipment, fault code,</text>
+  <text x="624" y="502" class="t">model and time range</text>
+  <text x="624" y="524" class="tag">nested JSON documents</text>
+
+  <!-- RAG serving -->
+  <rect x="900" y="132" width="250" height="150" rx="10" fill="#f5f3ff" stroke="#a78bfa"/>
+  <text x="914" y="156" class="h">Hybrid retriever</text>
+  <text x="914" y="176" class="t">entity extraction (EQ-/SN- IDs)</text>
+  <text x="914" y="194" class="t">+ keyword routing → per-store</text>
+  <text x="914" y="212" class="t">queries; one failing store</text>
+  <text x="914" y="230" class="t">degrades, never fails, a request</text>
+  <text x="914" y="254" class="t">retrieval ≈ 0.05 s (P50)</text>
+  <text x="914" y="272" class="tag">rag/pipeline.py</text>
+
+  <rect x="900" y="300" width="250" height="110" rx="10" fill="#f5f3ff" stroke="#a78bfa"/>
+  <text x="914" y="324" class="h">Grounded generation</text>
+  <text x="914" y="344" class="t">Ollama · Phi (local, temp 0)</text>
+  <text x="914" y="362" class="t">evidence budget per store,</text>
+  <text x="914" y="380" class="t">source IDs required in answer</text>
+  <text x="914" y="398" class="tag">rag/generator.py · rag/prompts.py</text>
+
+  <rect x="900" y="428" width="250" height="100" rx="10" fill="#f5f3ff" stroke="#a78bfa"/>
+  <text x="914" y="452" class="h">Provenance check</text>
+  <text x="914" y="472" class="t">cited IDs vs retrieved IDs;</text>
+  <text x="914" y="490" class="t">fallback list scored separately</text>
+  <text x="914" y="512" class="tag">rag/provenance.py</text>
+
+  <rect x="900" y="546" width="250" height="104" rx="10" fill="#0f172a"/>
+  <text x="914" y="572" class="h" fill="#ffffff" style="fill:#ffffff">Answer + citations</text>
+  <text x="914" y="594" class="t" style="fill:#cbd5e1">CLI: gigavolt-ask</text>
+  <text x="914" y="612" class="t" style="fill:#cbd5e1">20-question benchmark:</text>
+  <text x="914" y="630" class="t" style="fill:#cbd5e1">P50/P95/P99 per stage</text>
+
+  <!-- Edges: sources -> ingestion -->
+  <path class="edge" d="M230,186 L290,190"/>
+  <path class="edge" d="M230,346 L290,340"/>
+  <path class="edge" d="M230,509 L262,542 L570,542 L610,505"/>
+
+  <!-- ingestion -> stores -->
+  <path class="edge" d="M550,190 L610,200"/>
+  <path class="edge" d="M550,340 L610,358"/>
+  <path class="edge dash" d="M610,250 C580,300 580,420 552,470"/>
+  <path class="edge dash" d="M420,550 L420,536"/>
+
+  <!-- stores -> retriever -->
+  <path class="edge" d="M840,200 L900,200"/>
+  <path class="edge" d="M840,360 C870,330 880,260 900,240"/>
+  <path class="edge" d="M840,490 C880,450 885,300 900,262"/>
+
+  <!-- retriever -> generation -> provenance -> answer -->
+  <path class="edge" d="M1025,282 L1025,300"/>
+  <path class="edge" d="M1025,410 L1025,428"/>
+  <path class="edge" d="M1025,528 L1025,546"/>
+</svg>

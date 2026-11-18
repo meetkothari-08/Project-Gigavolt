@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.my.cnf
+
+# Source datasets and derived corpora (supply your own; see docs/deployment.md)
+data/
+
+# Runtime state, logs and vector stores
+var/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite3
+chroma_store/
+
+# Archives and dumps
+*.zip
+*.tar.gz
+*.sql.gz
+*_seed.sql
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

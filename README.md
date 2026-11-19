@@ -21,31 +21,31 @@ Gigavolt turns messy ERP extracts, technical PDFs and battery telemetry into a q
 
 <p align="center"><img src="docs/architecture.svg" alt="Gigavolt architecture" width="100%"></p>
 
-## Milestones
+## Build roadmap
 
 | # | Milestone | What was built | Headline result |
 |:-:|---|---|---|
-| 1 | [**Data Ingestion & Lakehouse**](01-data-ingestion/) | Bronze → staging → quarantine → 3NF Silver in SQL, unit-tested cleansing functions, raw-data profiler | 9,498 raw → 9,296 clean rows, **0 orphaned FKs**; rebuild matches production on **99.993%** of cells |
-| 2 | [**SQL Automation & Audit Security**](02-sql-automation/) | Generated RAG-context column, payload procedure, audit triggers, immutable audit log, PII-masked view | **11 / 11** programmability checks |
-| 3 | [**Galera Cluster & ColumnStore**](03-galera-columnstore/) | 3-node Galera on EC2 + EBS, manual `grastate.dat` bootstrap, ColumnStore on node 3 | Writes continued through a node failure; node rejoined and resynced |
-| 4 | [**Vector Search**](04-vector-search/) | Sentence-aware token chunking, E5 embeddings, HNSW grid search, MariaDB Vector → ChromaDB | Recall@5 **1.0** at **~2 ms**; Hit@5 **1.00**, MRR **0.893** |
-| 5 | [**Hybrid RAG Engine**](05-hybrid-rag/) | Entity- and keyword-routed retrieval over 3 stores, Ollama/Phi generation, citation validation | Retrieval **≈ 0.05 s** across all stores |
-| 6 | [**Automation & Evaluation**](06-automation/) | Hash-based incremental sync for rows and PDFs, HTTP services, 20-question benchmark, citation audit | 1-row change detected among 9,296; index 64 → 66 → 64 on PDF add/delete |
+| 1 | [**Data Ingestion & Lakehouse**](m1-erp-pipeline/) | Bronze → staging → quarantine → 3NF Silver in SQL, unit-tested cleansing functions, raw-data profiler | 9,498 raw → 9,296 clean rows, **0 orphaned FKs**; rebuild matches production on **99.993%** of cells |
+| 2 | [**SQL Automation & Audit Security**](m2-database-logic/) | Generated RAG-context column, payload procedure, audit triggers, immutable audit log, PII-masked view | **11 / 11** programmability checks |
+| 3 | [**Galera Cluster & ColumnStore**](m3-ha-cluster/) | 3-node Galera on EC2 + EBS, manual `grastate.dat` bootstrap, ColumnStore on node 3 | Writes continued through a node failure; node rejoined and resynced |
+| 4 | [**Vector Search**](m4-semantic-search/) | Sentence-aware token chunking, E5 embeddings, HNSW grid search, MariaDB Vector → ChromaDB | Recall@5 **1.0** at **~2 ms**; Hit@5 **1.00**, MRR **0.893** |
+| 5 | [**Hybrid RAG Engine**](m5-rag-assistant/) | Entity- and keyword-routed retrieval over 3 stores, Ollama/Phi generation, citation validation | Retrieval **≈ 0.05 s** across all stores |
+| 6 | [**Automation & Evaluation**](m6-ops-evaluation/) | Hash-based incremental sync for rows and PDFs, HTTP services, 20-question benchmark, citation audit | 1-row change detected among 9,296; index 64 → 66 → 64 on PDF add/delete |
 
-Every milestone folder has a README with a summary, a map of its files, how to run it, and the detailed design and results.
+Each `mN-…` folder is self-contained: its README opens with a summary box, a map of the files, and the commands to run that phase, followed by the design and measured results.
 
 ## Repository map
 
 ```
-├── 01-data-ingestion/       M1  sql/ · validation/ · tools/ · results/ · legacy_v1/
-├── 02-sql-automation/       M2  sql/ · validation/
-├── 03-galera-columnstore/   M3  cluster design, bootstrap protocol, failover test
-├── 04-vector-search/        M4  chunking/ · scripts/ · notebooks/ · results/
-├── 05-hybrid-rag/           M5  gigavolt/ (config, retrieval/, rag/, cli)
-├── 06-automation/           M6  ingestion/ · services/ · benchmark/ · results/ · evidence/ · deploy/
-├── docs/                    architecture diagram, deployment guide
-├── scripts/                 deploy_database.sh (M1 + M2 schema, data and validation)
-└── tests/                   52 offline unit tests + MariaDB integration tests
+├── m1-erp-pipeline/      M1  sql/ · validation/ · tools/ · results/ · legacy_v1/
+├── m2-database-logic/    M2  sql/ · validation/
+├── m3-ha-cluster/        M3  cluster design, bootstrap protocol, failover test
+├── m4-semantic-search/   M4  chunking/ · scripts/ · notebooks/ · results/
+├── m5-rag-assistant/     M5  gigavolt/ (config, retrieval/, rag/, cli)
+├── m6-ops-evaluation/    M6  ingestion/ · services/ · benchmark/ · results/ · evidence/ · deploy/
+├── docs/                     architecture diagram, deployment guide
+├── scripts/                  deploy_database.sh (M1 + M2 schema, data and validation)
+└── tests/                    52 offline unit tests + MariaDB integration tests
 ```
 
 The Python code installs as one package, `gigavolt`, whose modules live in the milestone that introduced them: `gigavolt.chunking` (M4), `gigavolt.retrieval` and `gigavolt.rag` (M5), `gigavolt.ingestion` and `gigavolt.services` (M6).
@@ -73,11 +73,11 @@ Full two-server setup: [docs/deployment.md](docs/deployment.md). Source datasets
 
 ## Engineering highlights
 
-- **Reconciled against production.** The cleansing pipeline was rebuilt from raw CSVs and compared cell by cell with the production load. That surfaced four production defects (carriage returns from a CRLF load, an uncleaned column, lost zip leading zeros, tag-wrapped `N/A`), which are now fixed and checked automatically. → [M1](01-data-ingestion/#reconciliation-against-the-production-load)
-- **Honest provenance metrics.** A re-audit found the citation metric counted an appended fallback source list as model citations. The checker now scores claim-level citations separately. → [M5](05-hybrid-rag/#provenance-and-the-citation-audit)
-- **Degrade, don't fail.** Every retrieval route isolates its own errors, and every client retries with reconnect, so a dead store shrinks the evidence instead of breaking the assistant. → [M5](05-hybrid-rag/)
-- **Commit state last.** Both incremental pipelines save their checkpoint only after the downstream write succeeds. Documents are upserted first and obsolete chunks deleted second. → [M6](06-automation/)
-- **Measure the right thing.** Vector latency excludes embedding time, and RAG latency is split by stage: generation is 99.5% of it, retrieval about 0.05 s. → [M6](06-automation/#rag-benchmark)
+- **Reconciled against production.** The cleansing pipeline was rebuilt from raw CSVs and compared cell by cell with the production load. That surfaced four production defects (carriage returns from a CRLF load, an uncleaned column, lost zip leading zeros, tag-wrapped `N/A`), which are now fixed and checked automatically. → [M1](m1-erp-pipeline/#reconciliation-against-the-production-load)
+- **Honest provenance metrics.** A re-audit found the citation metric counted an appended fallback source list as model citations. The checker now scores claim-level citations separately. → [M5](m5-rag-assistant/#provenance-and-the-citation-audit)
+- **Degrade, don't fail.** Every retrieval route isolates its own errors, and every client retries with reconnect, so a dead store shrinks the evidence instead of breaking the assistant. → [M5](m5-rag-assistant/)
+- **Commit state last.** Both incremental pipelines save their checkpoint only after the downstream write succeeds. Documents are upserted first and obsolete chunks deleted second. → [M6](m6-ops-evaluation/)
+- **Measure the right thing.** Vector latency excludes embedding time, and RAG latency is split by stage: generation is 99.5% of it, retrieval about 0.05 s. → [M6](m6-ops-evaluation/#rag-benchmark)
 
 ## Limitations and next steps
 

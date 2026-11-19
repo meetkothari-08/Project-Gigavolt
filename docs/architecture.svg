@@ -53,7 +53,7 @@
   <text x="304" y="176" class="t">raw text landing, typed staging,</text>
   <text x="304" y="194" class="t">latest-wins dedup, quarantine</text>
   <text x="304" y="212" class="t">3NF schema · 0 orphaned FKs</text>
-  <text x="304" y="236" class="tag">01-data-ingestion</text>
+  <text x="304" y="236" class="tag">m1-erp-pipeline</text>
 
   <rect x="290" y="268" width="260" height="140" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
   <text x="304" y="292" class="h">Document pipeline</text>
@@ -62,21 +62,21 @@
   <text x="304" y="348" class="t">E5-small-v2 passage embeddings</text>
   <text x="304" y="366" class="t">SHA-256 change detection: add /</text>
   <text x="304" y="384" class="t">modify / delete kept in sync</text>
-  <text x="304" y="400" class="tag">04-vector-search · 06-automation</text>
+  <text x="304" y="400" class="tag">m4-semantic-search · m6-ops-evaluation</text>
 
   <rect x="290" y="424" width="260" height="110" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
   <text x="304" y="448" class="h">Relational change detection</text>
   <text x="304" y="468" class="t">row hashes vs SQLite state →</text>
   <text x="304" y="486" class="t">NEW / MODIFIED → validate →</text>
   <text x="304" y="504" class="t">audit-log checkpoint</text>
-  <text x="304" y="522" class="tag">06-automation/ingestion</text>
+  <text x="304" y="522" class="tag">m6-ops-evaluation/ingestion</text>
 
   <rect x="290" y="550" width="260" height="100" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
   <text x="304" y="574" class="h">SQL programmability</text>
   <text x="304" y="594" class="t">generated service context, RAG</text>
   <text x="304" y="612" class="t">payload procedure, audit triggers,</text>
   <text x="304" y="630" class="t">immutable log, masked view</text>
-  <text x="304" y="646" class="tag">02-sql-automation</text>
+  <text x="304" y="646" class="tag">m2-database-logic</text>
 
   <!-- Stores -->
   <rect x="610" y="132" width="230" height="150" rx="10" fill="#ecfdf5" stroke="#34d399"/>
@@ -86,20 +86,20 @@
   <text x="624" y="212" class="t">9,296 rows · Audit_Logs</text>
   <text x="624" y="236" class="t">HA: 3-node Galera cluster,</text>
   <text x="624" y="254" class="t">manual bootstrap, ColumnStore</text>
-  <text x="624" y="272" class="tag">01 · 02 · 03</text>
+  <text x="624" y="272" class="tag">m1 · m2 · m3</text>
 
   <rect x="610" y="300" width="230" height="120" rx="10" fill="#ecfdf5" stroke="#34d399"/>
   <text x="624" y="324" class="h">ChromaDB · documents</text>
   <text x="624" y="344" class="t">64 chunks · 384-d cosine</text>
   <text x="624" y="362" class="t">HNSW M=8, ef_c=50, ef_s=20</text>
   <text x="624" y="380" class="t">Recall@5 = 1.0 · P50 ≈ 2 ms</text>
-  <text x="624" y="404" class="tag">04 · embedding API :8001</text>
+  <text x="624" y="404" class="tag">m4 · embedding API :8001</text>
 
   <rect x="610" y="440" width="230" height="100" rx="10" fill="#ecfdf5" stroke="#34d399"/>
   <text x="624" y="464" class="h">MongoDB · telemetry</text>
   <text x="624" y="484" class="t">by equipment, fault code,</text>
   <text x="624" y="502" class="t">model and time range</text>
-  <text x="624" y="524" class="tag">05 · nested JSON documents</text>
+  <text x="624" y="524" class="tag">m5 · nested JSON documents</text>
 
   <!-- RAG serving -->
   <rect x="900" y="132" width="250" height="150" rx="10" fill="#f5f3ff" stroke="#a78bfa"/>
@@ -109,20 +109,20 @@
   <text x="914" y="212" class="t">queries; one failing store</text>
   <text x="914" y="230" class="t">degrades, never fails, a request</text>
   <text x="914" y="254" class="t">retrieval ≈ 0.05 s (P50)</text>
-  <text x="914" y="272" class="tag">05-hybrid-rag</text>
+  <text x="914" y="272" class="tag">m5-rag-assistant</text>
 
   <rect x="900" y="300" width="250" height="110" rx="10" fill="#f5f3ff" stroke="#a78bfa"/>
   <text x="914" y="324" class="h">Grounded generation</text>
   <text x="914" y="344" class="t">Ollama · Phi (local, temp 0)</text>
   <text x="914" y="362" class="t">evidence budget per store,</text>
   <text x="914" y="380" class="t">source IDs required in answer</text>
-  <text x="914" y="398" class="tag">05-hybrid-rag</text>
+  <text x="914" y="398" class="tag">m5-rag-assistant</text>
 
   <rect x="900" y="428" width="250" height="100" rx="10" fill="#f5f3ff" stroke="#a78bfa"/>
   <text x="914" y="452" class="h">Provenance check</text>
   <text x="914" y="472" class="t">cited IDs vs retrieved IDs;</text>
   <text x="914" y="490" class="t">fallback list scored separately</text>
-  <text x="914" y="512" class="tag">05-hybrid-rag · 06-automation</text>
+  <text x="914" y="512" class="tag">m5-rag-assistant · m6-ops-evaluation</text>
 
   <rect x="900" y="546" width="250" height="104" rx="10" fill="#0f172a"/>
   <text x="914" y="572" class="h" fill="#ffffff" style="fill:#ffffff">Answer + citations</text>

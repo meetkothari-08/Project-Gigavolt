@@ -16,9 +16,9 @@ def load(path: str, name: str):
     return module
 
 
-rag_benchmark = load("06-automation/benchmark/rag_benchmark.py", "rag_benchmark")
-audit_saved = load("06-automation/benchmark/audit_saved_answers.py", "audit_saved_answers")
-profiler = load("01-data-ingestion/tools/profile_raw_erp.py", "profile_raw_erp")
+rag_benchmark = load("m6-ops-evaluation/benchmark/rag_benchmark.py", "rag_benchmark")
+audit_saved = load("m6-ops-evaluation/benchmark/audit_saved_answers.py", "audit_saved_answers")
+profiler = load("m1-erp-pipeline/tools/profile_raw_erp.py", "profile_raw_erp")
 
 
 @pytest.mark.parametrize(("percent", "expected"), [(0, 1.0), (50, 2.5), (100, 4.0)])
@@ -104,7 +104,7 @@ def test_profiler_detects_quality_issues(tmp_path):
     assert fks["warranty_claims.part_id -> parts"]["blank"] == 1
 
 
-compare_silver = load("01-data-ingestion/tools/compare_silver.py", "compare_silver")
+compare_silver = load("m1-erp-pipeline/tools/compare_silver.py", "compare_silver")
 
 
 @pytest.mark.parametrize(

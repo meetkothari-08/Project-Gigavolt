@@ -25,10 +25,10 @@ db-validate:
 	scripts/deploy_database.sh --validate
 
 profile:            ## Data-quality profile of the raw ERP extracts
-	python 01-data-ingestion/tools/profile_raw_erp.py data/raw/erp
+	python m1-erp-pipeline/tools/profile_raw_erp.py data/raw/erp
 
 reconcile:          ## Compare rebuilt Silver with a reference schema: make reconcile REF=gigavolt_prod
-	python 01-data-ingestion/tools/compare_silver.py --candidate gigavolt --reference $(REF) --apply-fixes
+	python m1-erp-pipeline/tools/compare_silver.py --candidate gigavolt --reference $(REF) --apply-fixes
 
 audit:              ## Re-audit citations in the latest saved RAG benchmark
-	python 06-automation/benchmark/audit_saved_answers.py $$(ls -t 06-automation/results/benchmark_*.csv | head -1)
+	python m6-ops-evaluation/benchmark/audit_saved_answers.py $$(ls -t m6-ops-evaluation/results/benchmark_*.csv | head -1)

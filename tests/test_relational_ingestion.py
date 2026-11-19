@@ -3,8 +3,8 @@ from datetime import date
 from decimal import Decimal
 
 from gigavolt.ingestion.relational.detector import RelationalDetector, calculate_hash
-from gigavolt.ingestion.relational.pipeline import RelationalPipeline
 from gigavolt.ingestion.relational.state import RelationalState
+from gigavolt.ingestion.relational.sync import RelationalPipeline
 from gigavolt.ingestion.relational.validator import RelationalValidator
 
 

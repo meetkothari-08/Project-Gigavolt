@@ -16,8 +16,8 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-M1="$REPO_DIR/01-data-ingestion"
-M2="$REPO_DIR/02-sql-automation"
+M1="$REPO_DIR/m1-erp-pipeline"
+M2="$REPO_DIR/m2-database-logic"
 DATABASE="${MARIADB_DATABASE:-gigavolt}"
 SEED_FILE=""
 RAW_DIR=""

@@ -6,7 +6,7 @@ The system ran on AWS EC2 (Ubuntu) as two application servers, plus the database
 
 | Server | Runs | Install |
 |---|---|---|
-| **Vector / document server** | ChromaDB HTTP server `:8000`, embedding API `:8001`, document ingestion trigger `:8002`, `04-vector-search/scripts/` corpus build | `pip install -e ".[ml]"` |
+| **Vector / document server** | ChromaDB HTTP server `:8000`, embedding API `:8001`, document ingestion trigger `:8002`, `m4-semantic-search/scripts/` corpus build | `pip install -e ".[ml]"` |
 | **RAG server** | `gigavolt-ask`, relational ingestion, benchmark, Ollama `:11434` with `phi` | `pip install -e .` |
 | **Database tier** | MariaDB (Silver schema; 3-node Galera for HA), MongoDB (telemetry) | see below |
 
@@ -40,10 +40,10 @@ scripts/deploy_database.sh --seed silver_seed.sql --validate
 To reconcile a rebuild with a reference copy (for example, production restored into `gigavolt_prod`):
 
 ```bash
-python 01-data-ingestion/tools/compare_silver.py --candidate gigavolt --reference gigavolt_prod --apply-fixes
+python m1-erp-pipeline/tools/compare_silver.py --candidate gigavolt --reference gigavolt_prod --apply-fixes
 ```
 
-Create a read-only application account (the grants are listed in [`02-sql-automation/sql/05_security_views.sql`](../02-sql-automation/sql/05_security_views.sql)) and put it in `MARIADB_USER` / `MARIADB_PASSWORD`. The relational pipeline and the RAG retriever only ever need `SELECT`.
+Create a read-only application account (the grants are listed in [`m2-database-logic/sql/05_security_views.sql`](../m2-database-logic/sql/05_security_views.sql)) and put it in `MARIADB_USER` / `MARIADB_PASSWORD`. The relational pipeline and the RAG retriever only ever need `SELECT`.
 
 ## 3. MongoDB
 
@@ -61,11 +61,11 @@ mongosh sensorDB --eval '
 
 ```bash
 export GIGAVOLT_DOCUMENTS_DIR=data/documents   # the technical PDFs
-python 04-vector-search/scripts/extract_and_chunk.py
-python 04-vector-search/scripts/validate_chunks.py
-python 04-vector-search/scripts/rebuild_chroma_from_chunks.py    # or steps 3-5 through MariaDB Vector
+python m4-semantic-search/scripts/extract_and_chunk.py
+python m4-semantic-search/scripts/validate_chunks.py
+python m4-semantic-search/scripts/rebuild_chroma_from_chunks.py    # or steps 3-5 through MariaDB Vector
 
-sudo cp 06-automation/deploy/systemd/*.service /etc/systemd/system/
+sudo cp m6-ops-evaluation/deploy/systemd/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now gigavolt-chroma gigavolt-embedding-api gigavolt-ingestion-api
 curl -s localhost:8001/health
@@ -86,7 +86,7 @@ ollama pull phi
 gigavolt-ingest-relational --dry-run        # check DB connectivity and validation
 gigavolt-ingest-relational
 gigavolt-ask "Show the service history and warranty claims for EQ-5508"
-python 06-automation/benchmark/rag_benchmark.py
+python m6-ops-evaluation/benchmark/rag_benchmark.py
 ```
 
 ## Data
@@ -98,8 +98,8 @@ data/
 ├── raw/erp/{customers,equipment,dispatches,parts,warranty_claims}.csv
 ├── raw/telemetry/telemetry_data.json
 ├── documents/*.pdf
-├── processed/            # written by 04-vector-search/scripts
-└── chroma_store/         # written by 04-vector-search/scripts and the document pipeline
+├── processed/            # written by m4-semantic-search/scripts
+└── chroma_store/         # written by m4-semantic-search/scripts and the document pipeline
 ```
 
 ## Security notes

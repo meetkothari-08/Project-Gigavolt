@@ -47,8 +47,8 @@ def test_search_table_rejects_unknown_tables(retriever):
 
 def test_relational_pipeline_baselines_all_silver_rows(tmp_path):
     from gigavolt.ingestion.relational.detector import RelationalDetector
-    from gigavolt.ingestion.relational.pipeline import RelationalPipeline
     from gigavolt.ingestion.relational.state import RelationalState
+    from gigavolt.ingestion.relational.sync import RelationalPipeline
 
     state = RelationalState(tmp_path / "state.db")
     first = RelationalPipeline(RelationalDetector(state=state)).run()

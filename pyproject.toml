@@ -30,37 +30,37 @@ dev = ["pytest>=8.0", "ruff>=0.5"]
 
 [project.scripts]
 gigavolt-ask = "gigavolt.cli:main"
-gigavolt-ingest-relational = "gigavolt.ingestion.relational.pipeline:main"
-gigavolt-ingest-documents = "gigavolt.ingestion.documents.pipeline:main"
+gigavolt-ingest-relational = "gigavolt.ingestion.relational.sync:main"
+gigavolt-ingest-documents = "gigavolt.ingestion.documents.sync:main"
 
 # One `gigavolt` package, with each subpackage kept in the milestone folder
 # that introduced it.
 [tool.setuptools]
 packages = [
-    "gigavolt",                        # 05-hybrid-rag: config, retry, CLI
-    "gigavolt.retrieval",              # 05-hybrid-rag
-    "gigavolt.rag",                    # 05-hybrid-rag
-    "gigavolt.chunking",               # 04-vector-search
-    "gigavolt.ingestion",              # 06-automation
-    "gigavolt.ingestion.relational",   # 06-automation
-    "gigavolt.ingestion.documents",    # 06-automation
-    "gigavolt.services",               # 06-automation
+    "gigavolt",                        # m5-rag-assistant: config, retry, CLI
+    "gigavolt.retrieval",              # m5-rag-assistant
+    "gigavolt.rag",                    # m5-rag-assistant
+    "gigavolt.chunking",               # m4-semantic-search
+    "gigavolt.ingestion",              # m6-ops-evaluation
+    "gigavolt.ingestion.relational",   # m6-ops-evaluation
+    "gigavolt.ingestion.documents",    # m6-ops-evaluation
+    "gigavolt.services",               # m6-ops-evaluation
 ]
 
 [tool.setuptools.package-dir]
-"gigavolt" = "05-hybrid-rag/gigavolt"
-"gigavolt.chunking" = "04-vector-search/chunking"
-"gigavolt.ingestion" = "06-automation/ingestion"
-"gigavolt.services" = "06-automation/services"
+"gigavolt" = "m5-rag-assistant/gigavolt"
+"gigavolt.chunking" = "m4-semantic-search/chunking"
+"gigavolt.ingestion" = "m6-ops-evaluation/ingestion"
+"gigavolt.services" = "m6-ops-evaluation/services"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["04-vector-search/scripts"]
+pythonpath = ["m4-semantic-search/scripts"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-extend-exclude = ["04-vector-search/notebooks"]
+extend-exclude = ["m4-semantic-search/notebooks"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "BLE", "N", "A"]
@@ -72,4 +72,4 @@ known-first-party = ["gigavolt", "_common"]
 [tool.ruff.lint.per-file-ignores]
 # Experiment scripts are kept close to the code that produced the recorded
 # results. Their search() closures are invoked inside the same loop iteration.
-"04-vector-search/scripts/*.py" = ["E501", "B023", "B007", "BLE001"]
+"m4-semantic-search/scripts/*.py" = ["E501", "B023", "B007", "BLE001"]

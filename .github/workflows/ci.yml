@@ -15,6 +15,8 @@ jobs:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
       - run: ruff check .
+      - name: Lint shell scripts
+        run: pip install shellcheck-py && shellcheck scripts/*.sh m3-ha-cluster/scripts/*.sh m3-ha-cluster/local-test/*.sh
       - run: pytest -q
 
   sql:

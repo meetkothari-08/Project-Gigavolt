@@ -1,0 +1,29 @@
+# Galera configuration - Gigavolt Dynamics Milestone 3
+# Installed on gigavolt-3 as /etc/mysql/mariadb.conf.d/60-galera.cnf
+# (transcribed from the Milestone 3 report; private VPC addresses of the
+#  original, now-terminated EC2 instances)
+
+[galera]
+
+# Cluster identity
+wsrep_cluster_name = "Gigavolt_Galera_Cluster"
+
+# Galera provider
+wsrep_provider = "/usr/lib/galera/libgalera_smm.so"
+
+# All three Gigavolt nodes
+wsrep_cluster_address = "gcomm://172.31.35.66,172.31.37.242,172.31.34.131"
+
+# Enable Galera replication
+wsrep_on = ON
+
+# Replication settings
+binlog_format = ROW
+innodb_autoinc_lock_mode = 2
+
+# Node 3 identity
+wsrep_node_name = "gigavolt-3"
+wsrep_node_address = "172.31.34.131"
+
+# Accept connections on all interfaces
+bind-address = 0.0.0.0

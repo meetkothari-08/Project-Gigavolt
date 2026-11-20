@@ -1,4 +1,4 @@
-.PHONY: install install-ml lint test test-integration db db-raw db-validate profile audit reconcile
+.PHONY: install install-ml lint test test-integration db db-raw db-validate profile audit reconcile cluster-rehearsal
 
 install:            ## Core package + dev tools (RAG server)
 	pip install -e ".[dev]"
@@ -8,6 +8,7 @@ install-ml:         ## Add embedding model, tokenizer and PDF extraction (vector
 
 lint:
 	ruff check .
+	shellcheck scripts/*.sh m3-ha-cluster/scripts/*.sh m3-ha-cluster/local-test/*.sh
 
 test:               ## Offline unit tests (no databases or model servers needed)
 	pytest -q
@@ -32,3 +33,6 @@ reconcile:          ## Compare rebuilt Silver with a reference schema: make reco
 
 audit:              ## Re-audit citations in the latest saved RAG benchmark
 	python m6-ops-evaluation/benchmark/audit_saved_answers.py $$(ls -t m6-ops-evaluation/results/benchmark_*.csv | head -1)
+
+cluster-rehearsal:  ## Replay every M3 procedure on a local 3-node Galera cluster (root; DUMP=gigavolt_dump.sql)
+	sudo m3-ha-cluster/local-test/rehearse.sh $(DUMP)

@@ -26,7 +26,7 @@ ml = [
 ]
 # Notebook analysis.
 analysis = ["pandas>=2.0", "matplotlib>=3.8", "jupyter>=1.0"]
-dev = ["pytest>=8.0", "ruff>=0.5"]
+dev = ["pytest>=8.0", "ruff>=0.5", "shellcheck-py>=0.10"]
 
 [project.scripts]
 gigavolt-ask = "gigavolt.cli:main"

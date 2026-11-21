@@ -1,4 +1,4 @@
-# Milestone 6 · Automated Pipeline, Optimization & System Synthesis
+# Milestone 6 · Incremental Pipelines, Recovery & Evaluation
 
 Keeps every store current as data changes, recovers from service failures, and measures the whole system. Hash-based incremental ingestion syncs the relational and document stores. HTTP services run the embedding model and an ingestion trigger, and a 20-question benchmark profiles latency per stage and audits citations.
 
@@ -6,7 +6,7 @@ Keeps every store current as data changes, recovers from service failures, and m
 |---|---|
 | **Relational sync** | 9,296 records baselined with 0 invalid; a single-row change (EQ-5508) detected and processed |
 | **Document sync** | Add → 2 chunks indexed (64 → 66 vectors); delete → vectors removed (66 → 64) |
-| **Recovery** | Embedding service stopped and restarted; health check and remote retrieval recovered with no RAG restart |
+| **Recovery** | Embedding service stopped and restarted; health check, remote connectivity and vector retrieval recovered |
 | **Benchmark** | 20/20 answered · P50 13.6–15.1 s across 5 runs · generation = **99.5%** of latency |
 
 ## What's here

@@ -1,6 +1,6 @@
 # Legacy v1: first ingestion and cleansing pipeline
 
-The first version of the ERP pipeline, kept as written. It builds a separate database (`gigavolt_erp`) with its own schema and is **not** used by the rest of the system. The current pipeline is [`../sql/`](../sql/) (run with `scripts/deploy_database.sh --raw-dir`).
+The first version of the ERP pipeline, kept as written apart from comment tidying and a redacted password. It builds a separate database (`gigavolt_erp`) with its own schema and is **not** used by the rest of the system. The current pipeline is [`../sql/`](../sql/) (run with `scripts/deploy_database.sh --raw-dir`).
 
 | File | Purpose |
 |---|---|

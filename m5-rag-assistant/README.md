@@ -69,7 +69,7 @@ The relational retriever only reads an allow-list of six tables. Table and colum
 
 ## Generation settings
 
-Phi runs locally through Ollama with `temperature = 0`, `num_ctx = 1024` and `num_predict = 80`, so answers are deterministic and the prompt fits the context window. The evidence budget (document excerpts cut to 300 characters, 2 relational records, 3 telemetry readings) keeps the prompt inside that window. The system prompt ([`rag/prompts.py`](gigavolt/rag/prompts.py)) forbids unsupported claims. It also requires the model to keep documented diagnostic indicators separate from observed telemetry and from confirmed failures, and to state what evidence is missing.
+Phi runs locally through Ollama with `temperature = 0`, `num_ctx = 1024` and `num_predict = 80`, so answers are repeatable and the prompt fits the context window. The evidence budget (document excerpts cut to 300 characters, 2 relational records, 3 telemetry readings) keeps the prompt inside that window. The system prompt ([`rag/prompts.py`](gigavolt/rag/prompts.py)) forbids unsupported claims. It also requires the model to keep documented diagnostic indicators separate from observed telemetry and from confirmed failures, and to state what evidence is missing.
 
 ## Provenance and the citation audit
 

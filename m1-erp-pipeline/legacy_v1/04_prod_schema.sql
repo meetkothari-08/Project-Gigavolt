@@ -1,8 +1,7 @@
 -- 04_prod_schema.sql: Silver / 3NF production layer.
 -- ENGINE=InnoDB on every table (real types, PKs, FKs; MyISAM would silently ignore the FKs).
 -- Charset + collation are inherited from the gigavolt_erp database (utf8mb4 / utf8mb4_unicode_ci,
--- set in 01_staging_schema.sql); the per-table "DEFAULT CHARSET" clause is dropped only to fit
--- the hard minified byte budget for this file (<= 2600) and changes nothing about storage.
+-- set in 01_staging_schema.sql), so no per-table "DEFAULT CHARSET" clause is needed.
 -- FKs use the "FOREIGN KEY <name> (col)" form so each constraint is still explicitly named.
 -- Idempotent: children dropped before parents, parents created before children.
 USE gigavolt_erp;

@@ -1,12 +1,11 @@
 -- 05_transform_load.sql: Bronze import_* -> Silver 3NF (same table order as 04_prod_schema.sql).
 -- Dedup keeps the first-loaded row: JOIN to (SELECT MIN(stg_row_id) m ... GROUP BY <business key>).
--- dispatches and parts have 0 duplicate rows (verified in CONTEXT.md) so they skip the dedup JOIN.
+-- dispatches and parts have 0 duplicate rows (verified during profiling) so they skip the dedup JOIN.
 -- Orphan dispatches (equipment_id absent from equipment_units) are quarantined into
 -- rejected_dispatches BEFORE service_logs is loaded, so every service_logs FK resolves.
 -- Column lists are omitted: each SELECT lists columns in exact target-table order.
 -- 03_clean.sql already produced ISO 'YYYY-MM-DD' dates and bare numeric strings, so the
--- implicit string->DATE / string->DECIMAL cast on INSERT is exact; explicit wrappers are
--- dropped only to fit the hard minified byte budget (<= 2200) for this file.
+-- implicit string->DATE / string->DECIMAL cast on INSERT is exact.
 -- Idempotent: 04_prod_schema.sql recreates these tables empty immediately before this runs.
 USE gigavolt_erp;
 -- locations: zip functionally determines (city,state)

@@ -7,7 +7,10 @@ name = "gigavolt"
 version = "1.0.0"
 description = "Multi-model data platform and hybrid RAG engine for battery field service"
 readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Meet Kothari" }]
 requires-python = ">=3.10"
+keywords = ["rag", "mariadb", "galera", "chromadb", "mongodb", "data-engineering", "lakehouse"]
 dependencies = [
     "pymysql>=1.1",
     "pymongo>=4.6",
@@ -27,6 +30,9 @@ ml = [
 # Notebook analysis.
 analysis = ["pandas>=2.0", "matplotlib>=3.8", "jupyter>=1.0"]
 dev = ["pytest>=8.0", "ruff>=0.5", "shellcheck-py>=0.10"]
+
+[project.urls]
+Repository = "https://github.com/meetkothari-08/Project-Gigavolt"
 
 [project.scripts]
 gigavolt-ask = "gigavolt.cli:main"
